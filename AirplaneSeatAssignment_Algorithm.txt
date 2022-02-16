@@ -6,7 +6,7 @@ Output: Seating Plan
 1. Start
 
 2. Welcome message and instructions
-2a. Println "Welcome to Falco Flights: A Commercial Airline Booking System."
+2a. Println "Welcome to Ymirates Airline!"
 2b. Println "Enter the following information: "
 
 3. Ticket type selection
@@ -15,7 +15,7 @@ Output: Seating Plan
 3c. Display selected ticket type.
 
 4. Desired seat selection
-4a. Display random seating plan.
+4a. Print "Type 'V' to view vacant seats. Type 'P' to view partially occupied seats.
 4b. Println "Select desired seat: "
 4c. Read input desired seat.
  [LOOP] condition: if ticket type does not match seating plan, display 
