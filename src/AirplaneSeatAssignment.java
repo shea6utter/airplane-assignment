@@ -13,18 +13,19 @@ public class AirplaneSeatAssignment
         String[] ticket = {"First Class (Row 1-2)","Business Class (Row 3-7)",
         "Economy Class (Row 8-13)"};
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < ticket.length; i++)
             System.out.println(ticket[i]);
         
         return ticket;
     }
     
-    static void displayTickets ()
+    static void displayTickets (String TicketType)
     {
-        Scanner scanner = new Scanner(System.in);
-        String TicketType = scanner.nextLine();
-
-        System.out.println("Select ticket type: " + TicketType);
+        if (TicketType.equalsIgnoreCase("First Class (Row 1-2)"))
+        {
+            System.out.println("You have selected " + TicketType);
+        }
+    
     }
     /**
      * 
@@ -60,6 +61,10 @@ public class AirplaneSeatAssignment
         System.out.println("");
         initTickets();
 
+        Scanner scanner = new Scanner(System.in);
+        String TicketType;  
+        System.out.print("Select ticket type: ");
+        displayTickets(TicketType = scanner.nextLine());
 
         char[][] airlineSeat = new char [13][9];
         initSeat(airlineSeat);
