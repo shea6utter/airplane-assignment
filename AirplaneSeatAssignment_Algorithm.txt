@@ -1,0 +1,27 @@
+Airplane Seating Assignment Algorithm
+
+Input: Ticket type and desired seat
+Output: Seating Plan
+
+1. Start
+
+2. Welcome message and instructions
+2a. Println "Welcome to Falco Flights: A Commercial Airline Booking System."
+2b. Println "Enter the following information: "
+
+3. Ticket type selection
+3a. Println "Select ticket type (first class, business class, or economy class)"
+3b. Read input ticket type.
+3c. Display selected ticket type.
+
+4. Desired seat selection
+4a. Display random seating plan.
+4b. Println "Select desired seat: "
+4c. Read input desired seat.
+ [LOOP] condition: if ticket type does not match seating plan, display 
+ "Error. Selected seat does not match ticket type. Please try again." Return to 4a.
+4d. Display selected seat.
+
+5. Print "You have successfully booked [SEAT] for your [ticket type] Ymirates flight."
+
+6. End
