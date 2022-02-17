@@ -119,16 +119,19 @@ public class AirplaneSeatAssignment {
     }
     
     static void selectTicket () {
-        String TicketType;
 
-        System.out.print("Select ticket type: ");  
-        TicketType = scanner.nextLine();
-
+        String TicketType = "";
+        
         while(!TicketType.equalsIgnoreCase("Q")) {
+
             DisplaySeats();
+            initTicket();
+            System.out.print("Select ticket type: ");  
+            TicketType = scanner.nextLine();
+
             switch (TicketType.toUpperCase()) {
                 case "F":
-                    System.out.println("You have a First Class ticket.");
+                    System.out.println("You have a First Class ticket.");    
                     SeatSelect(1, 2);
                     break;
                 case "B":
@@ -139,14 +142,14 @@ public class AirplaneSeatAssignment {
                     System.out.println("You have an Economy Class ticket.");
                     SeatSelect(8, 13);
                     break;
+                case "Q":
+                    System.out.println("Thank you for choosing Ymirates Airline!");
+                    break;
                 default:
                     System.out.println("Invalid selection. Please try again.");
                     break;
             }
-        }
-        System.out.print(dashedLine());
-        System.out.println("Thank you for choosing Ymirates Airline!");
-        System.out.print(dashedLine());
+        }  
     }
 
     
@@ -186,10 +189,6 @@ public class AirplaneSeatAssignment {
                         System.out.println("Invalid option. Try again.");
                         break;
                 }
-
-        
-        initTicket();
         selectTicket();
-        
     }
 }
