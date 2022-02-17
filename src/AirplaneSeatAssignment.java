@@ -1,38 +1,59 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.lang.StringBuilder;
 
 public class AirplaneSeatAssignment
 {
-    /**
-     * initTicket Method
-     * @param TicketType
-     *  Display and selection of ticket types.
-     */
-    static String[] initTickets()
+    static String[] initTicket()
     {
-        String[] ticket = {"First Class (Row 1-2)","Business Class (Row 3-7)",
-        "Economy Class (Row 8-13)"};
+        String[] ticket = {"First Class","Business Class",
+        "Economy Class"};
 
         for (int i = 0; i < ticket.length; i++)
             System.out.println(ticket[i]);
         
         return ticket;
+
     }
     
-    static void displayTickets (String TicketType)
+    static void selectTicket (String TicketType)
     {
-        if (TicketType.equalsIgnoreCase("First Class (Row 1-2)"))
+        switch (TicketType)
         {
-            System.out.println("You have selected " + TicketType);
+            case "First Class":
+                System.out.println("You have a First Class ticket.");
+                System.out.println("Select a seat in Rows 1-2.");
+                break;
+            case "Business Class":
+                System.out.println("You have a Business Class ticket.");
+                System.out.println("Select a seat in Rows 3-7.");
+                break;
+            case "Economy Class":
+                System.out.println("You have an Economy Class ticket.");
+                System.out.println("Select a seat in Rows 8-13.");
+                break;
+            default:
+                System.out.println("Invalid selection. Please try again.");
+
         }
-    
     }
-    /**
-     * 
-     * @param args
-     * @throws Exception
-     */
-    
+
+    static String selectTicket2()
+    {
+        Scanner scanner = new Scanner(System.in);
+
+        String TicketType;
+        System.out.print("Select ticket type: ");  
+        TicketType = scanner.nextLine();
+        System.out.print(dashedLine());
+
+        selectTicket(TicketType);
+        System.out.print(dashedLine());
+
+        scanner.close();
+        return TicketType;
+    }
+
     static void initSeat (char[][] airlineSeat)
     {
         Random random = new Random();
@@ -49,26 +70,34 @@ public class AirplaneSeatAssignment
             for (int b = 0; b < 6; b++)
                 System.out.println(initSeat[a][b] + "\t");
     }
+
+    static String dashedLine()
+    {
+        StringBuilder sb = new StringBuilder(20);
+        for (int n = 0; n < 20; ++n)
+            sb.append('-');
+        sb.append(System.lineSeparator());
+        
+        return sb.toString();
+    }
     public static void main(String[] args) throws Exception 
     {
-        System.out.println("--------------------------------");
+
+        System.out.print(dashedLine());
         System.out.println("Welcome to Ymirates Airline!");
-        System.out.println("--------------------------------");
+        
+        System.out.print(dashedLine());
         System.out.println("Enter the following information.");
-        System.out.println("--------------------------------");
+        System.out.print(dashedLine());
 
         System.out.println("Ticket Types: ");
         System.out.println("");
-        initTickets();
+        initTicket();
+        System.out.print(dashedLine());
 
-        Scanner scanner = new Scanner(System.in);
-        String TicketType;  
-        System.out.print("Select ticket type: ");
-        displayTickets(TicketType = scanner.nextLine());
-
+        selectTicket2();
+      
         char[][] airlineSeat = new char [13][9];
         initSeat(airlineSeat);
-
-        scanner.close();
     }
 }
