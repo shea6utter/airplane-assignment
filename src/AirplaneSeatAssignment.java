@@ -19,14 +19,14 @@ public class AirplaneSeatAssignment {
         }
     }
     
-    static void RandomAirlineSeat () {
+    static void RandomAirlineSeat() {
         Random random = new Random();
         int max = 10;
         int min = 1;
         
         for (int x = 0; x < AirlineSeat.length; x++) {
             for (int y = 0; y > AirlineSeat[0].length; y++) {
-                int r = random.nextInt (max + min) + min;
+                int r = random.nextInt(max + min) + min;
                     if (r > 5) {
                         AirlineSeat[x][y] = '*';
                     } else if (r < 5) {
@@ -38,18 +38,18 @@ public class AirplaneSeatAssignment {
         }
     }
 
-    static void DisplaySeats () {
+    static void DisplaySeats() {
         System.out.printf("%8s ", "");
-
         char a = 'A';
-            for (int label = 0; label < AirlineSeat.length; label++) {
+            for (int label = 0; label < AirlineSeat[0].length; label++) {
                 System.out.printf("%5s ", a + "");
                 a++;
             }
             System.out.println();
 
             for (int x = 0; x < AirlineSeat.length; x++) {
-                System.out.printf("%8s ", "Row" + (x + 1));
+
+                System.out.printf("%8s ", "Row " + (x + 1));
                     for (int y = 0; y < AirlineSeat[0].length; y++) {
                         System.out.printf("%5s ", AirlineSeat[x][y] + "");
                     }
@@ -61,32 +61,32 @@ public class AirplaneSeatAssignment {
         int row = 0;
 
         do {
-            System.out.println("Choose a row between " + rowMin + " and "+ rowMax + ": ");
+            System.out.println("Select a row between " + rowMin + " and " + rowMax + ": ");
             try {
                 row = Integer.parseInt(scanner.nextLine());
                     if (row < rowMin || row > rowMax) {
-                        System.out.println("Invalid row! Try again");
+                        System.out.println("Inapplicable row. Try again");
                     }
             } catch (Exception e) {
-                System.out.println("Invalid input! Try again");
+                System.out.println("Inapplicable input. Try again.");
             }                   
         } while (row < rowMin || row > rowMax);
-            char seat = ' ';
+            char selected = ' ';
             char max = (char) ('A' + AirlineSeat[0].length - 1);
 
         do {
             System.out.println("Choose a seat between 'A' to '" + max + "' : ");
                 try {
-                AirlineSeat = scanner.nextLine().toUpperCase().charAt(0);
-                    if (AirlineSeat < 'A' || AirlineSeat > max) {
-                        System.out.println("Invalid seat. Please Try again");
+                selected = scanner.nextLine().toUpperCase().charAt(0);
+                    if (selected < 'A' || selected > max) {
+                        System.out.println("Invalid seat. Try again.");
                     }
                 } catch (Exception e) {
-                    System.out.println("Input Error. Please Try Again");
+                    System.out.println("Error. Try Again.");
                 }
-        } while (AirlineSeat < 'A' || AirlineSeat > max);
+        } while (selected < 'A' || selected > max);
             int x = row - 1;
-            int y = seat - 'A';
+            int y = selected - 'A';
 
                     if (AirlineSeat[x][y] == 'X') {
                         System.out.println("Seat is unavailable.");
@@ -101,53 +101,55 @@ public class AirplaneSeatAssignment {
     */
 
     static String[] initTicket() {
+
+        System.out.print(dashedLine());
+        System.out.println("Ticket Types: ");
+        System.out.println("");
+
         String[] ticket = {"F - First Class","B - Business Class",
         "E - Economy Class"};
 
-        for (int i = 0; i < ticket.length; i++)
+        for (int i = 0; i < ticket.length; i++) {
             System.out.println(ticket[i]);
-        
+        }
+        System.out.print(dashedLine());
+        System.out.println("Q - Quit Program");
         return ticket;
 
     }
     
-    static void selectTicket (String TicketType) {
-        switch (TicketType.toUpperCase()) {
-            case "F":
-                System.out.println("You have a First Class ticket.");
-                System.out.println("Select a seat in Rows 1-2.");
-                SeatSelect(1, 2);
-                break;
-            case "B":
-                System.out.println("You have a Business Class ticket.");
-                System.out.println("Select a seat in Rows 3-7.");
-                SeatSelect(3, 7);
-                break;
-            case "E":
-                System.out.println("You have an Economy Class ticket.");
-                System.out.println("Select a seat in Rows 8-13.");
-                SeatSelect(8, 13);
-                break;
-            case "Q":
-                System.out.println("Thank you for choosing Ymirates Airline!");
-            default:
-                System.out.println("Invalid selection. Please try again.");
-
-        }
-    }
-
-    static String selectTicket2() {
+    static void selectTicket () {
         String TicketType;
 
         System.out.print("Select ticket type: ");  
         TicketType = scanner.nextLine();
-        System.out.print(dashedLine());
 
-        selectTicket(TicketType);
+        while(!TicketType.equalsIgnoreCase("Q")) {
+            DisplaySeats();
+            switch (TicketType.toUpperCase()) {
+                case "F":
+                    System.out.println("You have a First Class ticket.");
+                    SeatSelect(1, 2);
+                    break;
+                case "B":
+                    System.out.println("You have a Business Class ticket.");
+                    SeatSelect(3, 7);
+                    break;
+                case "E":
+                    System.out.println("You have an Economy Class ticket.");
+                    SeatSelect(8, 13);
+                    break;
+                default:
+                    System.out.println("Invalid selection. Please try again.");
+                    break;
+            }
+        }
         System.out.print(dashedLine());
-
-        return TicketType;
+        System.out.println("Thank you for choosing Ymirates Airline!");
+        System.out.print(dashedLine());
     }
+
+    
 
     static String dashedLine() {
         StringBuilder sb = new StringBuilder(20);
@@ -166,30 +168,28 @@ public class AirplaneSeatAssignment {
         System.out.println("Enter the following information.");
         System.out.print(dashedLine());
 
-        AirlineSeat = new char [13][6];
+        AirlineSeat = new char[13][6];
 
-        String option;
-
-        System.out.print("View available seats? (Y/N): ");
+        String option = "";
+            
+            System.out.print("View preoccupied seats? (Y/N): ");
             option = scanner.nextLine();
-
+            
                 switch (option.toUpperCase()) {
                     case "Y":
-                        FreeAirlineSeat();
-                        break;
-                    case "N":
                         RandomAirlineSeat();
                         break;
+                    case "N":
+                        FreeAirlineSeat();
+                        break;
                     default:
-                        System.out.println("Invalid option");
+                        System.out.println("Invalid option. Try again.");
+                        break;
                 }
 
-        System.out.println("Ticket Types: ");
-        System.out.println();
+        
         initTicket();
-        System.out.print(dashedLine());
-
-        selectTicket2();
-              
+        selectTicket();
+        
     }
 }
